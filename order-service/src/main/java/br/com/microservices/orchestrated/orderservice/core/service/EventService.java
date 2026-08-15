@@ -32,7 +32,7 @@ public class EventService {
     }
 
     public Event findByFilters(EventFilters eventFilters) {
-        vlidateEmptyFilters(eventFilters);
+        validateEmptyFilters(eventFilters);
         if (!isEmpty(eventFilters.getOrderId())) {
             return findByOrderId(eventFilters.getOrderId());
         } else {
@@ -50,8 +50,8 @@ public class EventService {
                 orElseThrow(() -> new ValidationException("Event not found for transactionId: " + transactionId));
     }
 
-    private void vlidateEmptyFilters(EventFilters filsters) {
-        if (isEmpty(filsters.getOrderId()) && isEmpty(filsters.getTransactionId())) {
+    private void validateEmptyFilters(EventFilters filters) {
+        if (isEmpty(filters.getOrderId()) && isEmpty(filters.getTransactionId())) {
             throw new ValidationException("OrderId or Transaction ID must be informed");
         }
     }
